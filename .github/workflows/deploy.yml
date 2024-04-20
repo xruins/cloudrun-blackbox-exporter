@@ -23,6 +23,8 @@ jobs:
       with:
         service: 'blackbox-exporter'
         image: 'docker.io/ruins/cloudrun-blackbox-exporter'
+        region: 'asia-northeast1'
         flags: '--max-instances=1 --no-allow-unauthenticated'
+        timeout: "5s"
     - name: 'Use output'
       run: 'curl "${{ steps.deploy.outputs.url }}"'

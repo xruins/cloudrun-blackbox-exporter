@@ -1,0 +1,28 @@
+name: Deploy to Cloud Run
+
+on:
+  workflow_run:
+    workflows: ["Docker build and push"]
+    branches: ["main"]
+    types:
+      - completed
+      
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+    - uses: 'google-github-actions/auth@v2'
+      with:
+        workload_identity_provider: '${{ secrets.WIF_PROVIDER }}'
+        service_account: '${{ secrets.WIF_SERVICE_ACCOUNT }}'
+    - id: 'deploy'
+      uses: 'google-github-actions/deploy-cloudrun@v2'
+      with:
+        service: 'blackbox-exporter'
+        image: 'ghcr.io/xruins/cloudrun-blackbox-exporter'
+
+    - name: 'Use output'
+      run: 'curl "${{ steps.deploy.outputs.url }}"'

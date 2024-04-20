@@ -1,0 +1,34 @@
+modules:
+  http_2xx:
+    prober: http
+    timeout: 500ms
+  ssh4:
+    prober: tcp
+    timeout: 500ms
+    tcp:
+      preferred_ip_protocol: "ip4"
+      ip_protocol_fallback: false
+      query_response:
+      - expect: "^SSH-2.0-"
+      - send: "SSH-2.0-blackbox-ssh-check"
+  ssh6:
+    prober: tcp
+    timeout: 500ms
+    tcp:
+      preferred_ip_protocol: "ip6"
+      ip_protocol_fallback: false
+      query_response:
+      - expect: "^SSH-2.0-"
+      - send: "SSH-2.0-blackbox-ssh-check"
+  icmp4:
+    prober: icmp
+    timeout: 500ms
+    icmp:
+      preferred_ip_protocol: "ip4"
+      ip_protocol_fallback: false
+  icmp6:
+    prober: icmp
+    timeout: 500ms
+    icmp:
+      preferred_ip_protocol: "ip6"
+      ip_protocol_fallback: false

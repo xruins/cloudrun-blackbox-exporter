@@ -22,7 +22,7 @@ jobs:
       uses: 'google-github-actions/deploy-cloudrun@v2'
       with:
         service: 'blackbox-exporter'
-        image: 'ghcr.io/xruins/cloudrun-blackbox-exporter'
+        image: 'xruins/cloudrun-blackbox-exporter'
 
     - name: 'Use output'
       run: 'curl "${{ steps.deploy.outputs.url }}"'

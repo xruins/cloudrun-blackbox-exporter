@@ -22,7 +22,7 @@ jobs:
       uses: 'google-github-actions/deploy-cloudrun@v2'
       with:
         service: 'blackbox-exporter'
-        image: 'ruins/cloudrun-blackbox-exporter'
-
+        image: 'docker.io/ruins/cloudrun-blackbox-exporter'
+        flags: '--max-instances=1 --no-allow-unauthenticated'
     - name: 'Use output'
       run: 'curl "${{ steps.deploy.outputs.url }}"'

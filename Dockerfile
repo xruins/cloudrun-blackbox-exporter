@@ -4,4 +4,5 @@ LABEL org.opencontainers.image.source="https://github.com/xruins/cloudrun-blackb
 
 COPY config.yaml /etc/blackbox_exporter/config.yaml
 
-CMD ["--config.file=/etc/blackbox_exporter/config.yaml", "--web.listen-address=:$PORT"]
+ENTRYPOINT sh
+CMD ["-c", "blackbox_exporter", "--web.listen-address=:$PORT", "--config.file=/etc/blackbox_exporter/config.yaml"]

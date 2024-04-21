@@ -27,4 +27,4 @@ jobs:
         flags: '--max-instances=1 --no-allow-unauthenticated'
         timeout: "5s"
     - name: 'Use output'
-      run: 'curl "${{ steps.deploy.outputs.url }}"'
+      run: 'curl -H "Authorization: Bearer $(gcloud auth print-identity-token)" "${{ steps.deploy.outputs.url }}"'
